@@ -66,11 +66,12 @@ class AuthServiceImpl implements AuthService {
         ),
       );
       final responseData = response.data;
-      final userData = responseData['data']['user']['token'];
+      final userData = responseData['data']['user'];
+      final token = responseData['data']['token'];
 
       final user = UserModel.fromJson(userData);
-      await tokenManeger.saveAccessToken(userData);
-      print(userData);
+      await tokenManeger.saveAccessToken(token);
+      print(token);
 
       return user;
     } catch (e) {
