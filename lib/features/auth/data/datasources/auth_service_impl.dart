@@ -1,13 +1,13 @@
 import 'package:dio/dio.dart';
 import 'package:tutor_pro/core/constans/api_constans.dart';
 import 'package:tutor_pro/core/failure.dart';
-import 'package:tutor_pro/core/shared/token_manager.dart';
+import 'package:tutor_pro/features/auth/data/datasources/local/token_manager.dart';
 import 'package:tutor_pro/features/auth/data/datasources/auth_service.dart';
 import 'package:tutor_pro/features/auth/data/model/user_model.dart';
 
 class AuthServiceImpl implements AuthService {
   Dio dio = Dio();
-  AuthSharedPreferences authSharedPreferences = AuthSharedPreferences();
+  TokenManeger tokenManeger = TokenManeger();
 
   AuthServiceImpl(this.dio);
 
@@ -20,11 +20,28 @@ class AuthServiceImpl implements AuthService {
     try {
       final response = await dio.post(
         ApiConstans.register,
-        data: {'username': userName, 'email': email, 'password': password},
+        data: {
+          'username': userName,
+          'email': email,
+          'password': password,
+          'password_confirmation': '12345678',
+          'device': 'IPhone'
+        },
+        options: Options(
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+          },
+        ),
       );
 
-      final userData = response.data['user'];
+      final responseData = response.data;
+      final userData = responseData['data']['user'];
+      final token = responseData['data']['token'];
+
       final user = UserModel.fromJson(userData);
+      await tokenManeger.saveAccessToken(token);
+      print(token);
 
       return user;
     } catch (e) {
@@ -41,15 +58,19 @@ class AuthServiceImpl implements AuthService {
       final response = await dio.post(
         ApiConstans.login,
         data: {'email': email, 'password': password},
+        options: Options(
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+          },
+        ),
       );
-      print('hi');
-      final userData = response.data['user'];
-      final user = UserModel.fromJson(userData);
+      final responseData = response.data;
+      final userData = responseData['data']['user']['token'];
 
-      final token = response.headers['authorization'] as String?;
-      if (token != null) {
-        await authSharedPreferences.saveAccessToken(token);
-      }
+      final user = UserModel.fromJson(userData);
+      await tokenManeger.saveAccessToken(userData);
+      print(userData);
 
       return user;
     } catch (e) {
@@ -61,7 +82,7 @@ class AuthServiceImpl implements AuthService {
   Future<void> logout() async {
     try {
       // Отримати токен з SharedPreferences
-      final token = await authSharedPreferences.getAccessToken();
+      final token = await tokenManeger.getAccessToken();
 
       await dio.delete(
         ApiConstans.loginOut,

@@ -71,7 +71,7 @@ class _SignUpPageState extends State<SignUpPage> {
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 16),
             child: SignButton(
-              text: 'Sign In',
+              text: 'Sign Up',
               function: () {
                 final userName = userNameController.text;
                 final email = emailController.text;

@@ -1,6 +1,6 @@
 import 'package:shared_preferences/shared_preferences.dart';
 
-class AuthSharedPreferences {
+class TokenManeger {
   static const _accessTokenKey = 'access_token';
 
   Future<void> saveAccessToken(String token) async {

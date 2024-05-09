@@ -10,7 +10,7 @@ class AuthRepositoryImpl implements AuthRepository {
   final AuthService authService;
 
   AuthRepositoryImpl(this.authService);
-
+  @override
   FutureEither<User> register({
     required String userName,
     required String email,
@@ -52,7 +52,7 @@ class AuthRepositoryImpl implements AuthRepository {
   User _convertUserModelToUser(UserModel userModel) {
     return User(
       id: userModel.id,
-      accessToken: userModel.accessToken,
+      token: userModel.token,
       userName: userModel.userName,
       email: userModel.email,
     );

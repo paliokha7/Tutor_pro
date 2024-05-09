@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tutor_pro/features/auth/data/datasources/auth_service.dart';
 import 'package:tutor_pro/features/auth/data/datasources/auth_service_impl.dart';
-import 'package:tutor_pro/features/auth/data/repository/auth_repository.dart';
+import 'package:tutor_pro/features/auth/data/repository/auth_repository_impl.dart';
 import 'package:tutor_pro/features/auth/domain/repository/auth_repository.dart';
 import 'package:tutor_pro/features/auth/domain/usecases/login_user.dart';
 import 'package:tutor_pro/features/auth/domain/usecases/logout_user.dart';
@@ -25,14 +25,12 @@ class MyApp extends StatelessWidget {
     final Dio dio = Dio();
 
     final AuthService authService = AuthServiceImpl(dio);
-
     final AuthRepository authRepository = AuthRepositoryImpl(authService);
 
     return MultiBlocProvider(
       providers: [
         BlocProvider<AuthBloc>(
           create: (context) => AuthBloc(
-            // Ініціалізуємо AuthBloc з усіма необхідними залежностями
             registerUser: RegisterUser(authRepository),
             loginUser: LoginUser(authRepository),
             logoutUser: LogoutUser(authRepository),
@@ -46,7 +44,7 @@ class MyApp extends StatelessWidget {
             if (state is AuthSuccess) {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => HomePage()),
+                MaterialPageRoute(builder: (context) => const HomePage()),
               );
             } else if (state is AuthError) {
               ScaffoldMessenger.of(context).showSnackBar(
@@ -57,7 +55,7 @@ class MyApp extends StatelessWidget {
               );
             }
           },
-          child: const AuthScreen(), // Or SignInPage()
+          child: const AuthScreen(),
         ),
       ),
     );

@@ -1,6 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:tutor_pro/core/entities/user.dart';
+import 'package:tutor_pro/features/auth/data/datasources/local/token_manager.dart';
 
 import 'package:tutor_pro/features/auth/domain/usecases/login_user.dart';
 import 'package:tutor_pro/features/auth/domain/usecases/logout_user.dart';
@@ -13,6 +14,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   final RegisterUser registerUser;
   final LoginUser loginUser;
   final LogoutUser logoutUser;
+  TokenManeger tokenManeger = TokenManeger();
 
   AuthBloc({
     required this.registerUser,
@@ -34,7 +36,9 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
     eitherUser.fold(
       (failure) => emit(AuthError(failure.message)),
-      (user) => emit(AuthSuccess(user)),
+      (user) async {
+        emit(AuthSuccess(user));
+      },
     );
   }
 
@@ -53,14 +57,20 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
   Future<void> _onLogout(LogoutEvent event, Emitter<AuthState> emit) async {
     if (state is AuthSuccess) {
-      emit(AuthLoading());
-      final eitherUnit = await logoutUser(
-          LogoutUserParams(token: (state as AuthSuccess).user.accessToken));
+      final userToken = (state as AuthSuccess).token;
+      if (userToken != null) {
+        final eitherUnit = await logoutUser(LogoutUserParams(token: userToken));
 
-      eitherUnit.fold(
-        (failure) => emit(AuthError(failure.message)),
-        (_) => emit(AuthInitial()),
-      );
+        eitherUnit.fold(
+          (failure) => emit(AuthError(failure.message)),
+          (_) {
+            tokenManeger.removeAccessToken(); // Видалення токену
+            emit(AuthInitial()); // Перехід в AuthInitial після виходу
+          },
+        );
+      } else {
+        print('Failed');
+      }
     }
   }
 }
