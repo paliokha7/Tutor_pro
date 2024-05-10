@@ -15,8 +15,7 @@ class _SignUpPageState extends State<SignUpPage> {
   final TextEditingController userNameController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
-  final _formKey = GlobalKey<FormState>(); // Ключ форми для валідації
-
+  final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     return BlocListener<AuthCubit, AuthState>(

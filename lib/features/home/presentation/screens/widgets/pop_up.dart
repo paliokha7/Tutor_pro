@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tutor_pro/features/home/presentation/cubit/gpt_cubit.dart';
+import 'package:tutor_pro/features/home/presentation/screens/reading.dart';
 
 class PopUp extends StatefulWidget {
   final String subject;
@@ -34,6 +35,8 @@ class _PopUpState extends State<PopUp> {
           onPressed: () {
             final String topic = topicController.text;
             context.read<GptCubit>().fetchData(widget.subject, topic);
+            Navigator.push(
+                context, MaterialPageRoute(builder: (_) => const Reading()));
           },
           child: const Text('Submit'),
         ),

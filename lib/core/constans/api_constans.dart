@@ -8,5 +8,5 @@ class ApiConstans {
   static String geographyData = '$baseUrl/api/geography/topic-paraphrase/chat';
   static String literatureData =
       '$baseUrl/api/literature/topic-paraphrase/chat';
-  static String historyData = '$baseUrl/api/history/topic-paraphrase/chatаааа';
+  static String historyData = '$baseUrl/api/history/topic-paraphrase/chat';
 }
