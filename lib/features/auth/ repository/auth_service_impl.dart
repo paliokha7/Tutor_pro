@@ -1,13 +1,8 @@
 import 'package:dio/dio.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:tutor_pro/core/constans/api_constans.dart';
 import 'package:tutor_pro/core/failure.dart';
 import 'package:tutor_pro/features/auth/%20repository/token_manager.dart';
 import 'package:tutor_pro/features/auth/%20repository/model/user_model.dart';
-
-final authRepositoryProvider = Provider<AuthRepository>((ref) {
-  return AuthRepository();
-});
 
 class AuthRepository {
   Dio dio = Dio();
@@ -38,14 +33,11 @@ class AuthRepository {
         ),
       );
 
-      final responseData = response.data;
-      final userData = responseData['data']['user'];
-      final token = responseData['data']['token'];
+      final userData = response.data['data']['user'];
+      final token = response.data['data']['token'];
 
       final user = UserModel.fromJson(userData);
-      await tokenManeger.saveUserData(userData);
       await tokenManeger.saveAccessToken(token);
-      print(user);
 
       return user;
     } catch (e) {
@@ -68,13 +60,11 @@ class AuthRepository {
           },
         ),
       );
-      final responseData = response.data;
-      final userData = responseData['data']['user'];
-      final token = responseData['data']['token'];
+      final userData = response.data['data']['user'];
+      final token = response.data['data']['token'];
 
       final user = UserModel.fromJson(userData);
       await tokenManeger.saveAccessToken(token);
-      print(token);
 
       return user;
     } catch (e) {
@@ -96,9 +86,7 @@ class AuthRepository {
           },
         ),
       );
-      await tokenManeger.removeAccessToken(); // Видалення токену після виходу
-      print('Token after logout: ${await tokenManeger.getAccessToken()}');
-      print('Logout successful'); // Доданий вивід
+      await tokenManeger.removeAccessToken();
     } catch (e) {
       throw Failure('Failed to logout: $e');
     }

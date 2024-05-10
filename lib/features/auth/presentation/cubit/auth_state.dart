@@ -14,7 +14,7 @@ class AuthLoading extends AuthState {}
 class AuthAuthenticated extends AuthState {
   final UserModel user;
 
-  AuthAuthenticated({required this.user});
+  const AuthAuthenticated({required this.user});
 
   @override
   List<Object> get props => [user];
@@ -29,7 +29,7 @@ class LogIn extends AuthState {}
 class AuthError extends AuthState {
   final String error;
 
-  AuthError({required this.error});
+  const AuthError({required this.error});
 
   @override
   List<Object> get props => [error];

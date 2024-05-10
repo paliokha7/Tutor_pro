@@ -30,7 +30,7 @@ class AuthCubit extends Cubit<AuthState> {
       final user = await _authRepository.register(
           userName: userName, email: email, password: password);
       emit(AuthAuthenticated(user: user));
-      emit(LogIn()); // Додано подію LogIn після успішної реєстрації
+      emit(LogIn());
     } catch (e) {
       emit(AuthError(error: e.toString()));
     }
@@ -39,8 +39,7 @@ class AuthCubit extends Cubit<AuthState> {
   void logOut() async {
     try {
       await _authRepository.logout();
-      await Future.delayed(Duration.zero);
-      emit(LogOut()); // Надсилаємо подію LogOut
+      emit(LogOut());
     } catch (e) {
       emit(AuthError(error: e.toString()));
     }

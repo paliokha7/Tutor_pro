@@ -11,6 +11,8 @@ class Pallete {
   static const Color lightBlue = Color(0xFF9BD3D0);
   static const Color lightOrage = Color(0xFFFECCB5);
   static const Color lightRed = Color(0xFFD28181);
+  static const Color red = Color(0xFFF24822);
+
   static const Color green = Color(0xFF57A990);
 }
 
