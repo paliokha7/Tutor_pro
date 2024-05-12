@@ -1,16 +1,18 @@
 import 'package:dio/dio.dart';
+import 'package:fpdart/fpdart.dart';
 import 'package:tutor_pro/core/constans/api_constans.dart';
 import 'package:tutor_pro/core/failure.dart';
+import 'package:tutor_pro/core/type_defs.dart';
 import 'package:tutor_pro/features/auth/%20repository/token_manager.dart';
 import 'package:tutor_pro/features/auth/%20repository/model/user_model.dart';
 
 class AuthRepository {
   Dio dio = Dio();
-  TokenManeger tokenManeger = TokenManeger();
+  TokenManeger tokenManager = TokenManeger();
 
   AuthRepository();
 
-  Future<UserModel> register({
+  FutureEither<UserModel> register({
     required String userName,
     required String email,
     required String password,
@@ -22,7 +24,6 @@ class AuthRepository {
           'username': userName,
           'email': email,
           'password': password,
-          'password_confirmation': '12345678',
           'device': 'IPhone'
         },
         options: Options(
@@ -37,15 +38,19 @@ class AuthRepository {
       final token = response.data['data']['token'];
 
       final user = UserModel.fromJson(userData);
-      await tokenManeger.saveAccessToken(token);
+      await tokenManager.saveAccessToken(token);
 
-      return user;
-    } catch (e) {
-      throw Failure('Failed to register: $e');
+      return right(user); // Повернути результат успішної реєстрації
+    } on DioException catch (e) {
+      if (e.response?.statusCode == 422) {
+        return left(Failure('422'));
+      } else {
+        return left(Failure('Failed to register: ${e.message}'));
+      }
     }
   }
 
-  Future<UserModel> login({
+  FutureEither<UserModel> login({
     required String email,
     required String password,
   }) async {
@@ -60,21 +65,25 @@ class AuthRepository {
           },
         ),
       );
+
       final userData = response.data['data']['user'];
       final token = response.data['data']['token'];
 
       final user = UserModel.fromJson(userData);
-      await tokenManeger.saveAccessToken(token);
-
-      return user;
-    } catch (e) {
-      throw Failure('Failed to login: $e');
+      await tokenManager.saveAccessToken(token);
+      return right(user);
+    } on DioException catch (e) {
+      if (e.response?.statusCode == 422) {
+        return left(Failure('422'));
+      } else {
+        return left(Failure(e.toString()));
+      }
     }
   }
 
   Future<void> logout() async {
     try {
-      final token = await tokenManeger.getAccessToken();
+      final token = await tokenManager.getAccessToken();
 
       await dio.delete(
         ApiConstans.loginOut,
@@ -86,7 +95,7 @@ class AuthRepository {
           },
         ),
       );
-      await tokenManeger.removeAccessToken();
+      await tokenManager.removeAccessToken();
     } catch (e) {
       throw Failure('Failed to logout: $e');
     }

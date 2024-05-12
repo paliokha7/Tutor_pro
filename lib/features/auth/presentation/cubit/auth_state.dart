@@ -26,6 +26,8 @@ class LogOut extends AuthState {}
 
 class LogIn extends AuthState {}
 
+class Register extends AuthState {}
+
 class AuthError extends AuthState {
   final String error;
 
@@ -34,3 +36,5 @@ class AuthError extends AuthState {
   @override
   List<Object> get props => [error];
 }
+
+class AuthInvalidInput extends AuthState {}

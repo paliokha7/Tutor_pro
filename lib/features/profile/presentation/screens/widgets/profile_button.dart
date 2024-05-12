@@ -17,39 +17,36 @@ class ProfileButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 10),
-      child: Container(
-        width: double.infinity,
-        height: 50,
-        decoration: BoxDecoration(
-          color: Pallete.white,
-          borderRadius: BorderRadius.circular(12),
-          shape: BoxShape.rectangle,
-        ),
-        child: Padding(
-          padding: const EdgeInsets.all(8),
-          child: Row(
-            mainAxisSize: MainAxisSize.max,
-            children: [
-              Padding(
-                  padding: const EdgeInsets.only(left: 24, right: 12),
-                  child: SvgPicture.asset(
-                    svgPicture,
-                    colorFilter: ColorFilter.mode(color, BlendMode.srcIn),
-                  )),
-              Expanded(
-                child: Text(
-                  text,
-                  style: TextStyle(
-                    fontSize: 14,
-                    fontWeight: FontWeight.w500,
-                    color: textColor,
-                  ),
+    return Container(
+      width: double.infinity,
+      height: 50,
+      decoration: BoxDecoration(
+        color: Pallete.white,
+        borderRadius: BorderRadius.circular(12),
+        shape: BoxShape.rectangle,
+      ),
+      child: Padding(
+        padding: const EdgeInsets.all(8),
+        child: Row(
+          mainAxisSize: MainAxisSize.max,
+          children: [
+            Padding(
+                padding: const EdgeInsets.only(left: 24, right: 12),
+                child: SvgPicture.asset(
+                  svgPicture,
+                  colorFilter: ColorFilter.mode(color, BlendMode.srcIn),
+                )),
+            Expanded(
+              child: Text(
+                text,
+                style: TextStyle(
+                  fontSize: 14,
+                  fontWeight: FontWeight.w500,
+                  color: textColor,
                 ),
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

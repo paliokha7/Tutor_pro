@@ -17,28 +17,33 @@ class GptCubit extends Cubit<GptState> {
     try {
       switch (subjectKey) {
         case 'literature':
-          final data =
-              await _gptRepository.fetchLiteratureParaphrase(topic: topic);
+          final data = await _gptRepository.fetchLiteratureParaphrase(
+            topic: topic,
+          );
           emit(GptLoaded(gpt: data));
           break;
-        case 'geography':
-          final data =
-              await _gptRepository.fetchGeographyParaphrase(topic: topic);
+        case 'географія':
+          final data = await _gptRepository.fetchSubjectsParaphrase(
+              topic: topic, subject: subjectKey);
           emit(GptLoaded(gpt: data));
           break;
-        case 'history':
-          final data =
-              await _gptRepository.fetchHistoryParaphrase(topic: topic);
+        case 'історія':
+          final data = await _gptRepository.fetchSubjectsParaphrase(
+              topic: topic, subject: subjectKey);
           emit(GptLoaded(gpt: data));
           break;
-        case 'biology':
-          final data =
-              await _gptRepository.fetchBiologyParaphrase(topic: topic);
+        case 'біологія':
+          final data = await _gptRepository.fetchSubjectsParaphrase(
+              topic: topic, subject: subjectKey);
           emit(GptLoaded(gpt: data));
           break;
       }
     } catch (e) {
       emit(GptError(error: Failure('Failed to fetch data: $e')));
     }
+  }
+
+  void clearData() {
+    emit(GptInitial());
   }
 }

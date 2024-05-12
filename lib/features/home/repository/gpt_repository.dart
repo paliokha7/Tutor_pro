@@ -10,13 +10,14 @@ class GptRepository {
 
   GptRepository();
 
-  Future<GptModel> fetchGeographyParaphrase({required String topic}) async {
+  Future<GptModel> fetchSubjectsParaphrase(
+      {required String topic, required String subject}) async {
     try {
       final token = await tokenManeger.getAccessToken();
 
       final response = await dio.post(
-        ApiConstans.geographyData,
-        data: {'topic': topic},
+        ApiConstans.subjectsData,
+        data: {'topic': topic, "subject": subject},
         options: Options(
           headers: {
             'Accept': 'application/json',
@@ -58,62 +59,6 @@ class GptRepository {
         final literatureData = response.data['data'];
         final literature = GptModel.fromJson(literatureData);
         return literature;
-      } else {
-        throw Failure('Failed to get user data: ${response.statusCode}');
-      }
-    } catch (e) {
-      throw Failure('Failed to get user data: $e');
-    }
-  }
-
-  Future<GptModel> fetchBiologyParaphrase({required String topic}) async {
-    try {
-      final token = await tokenManeger.getAccessToken();
-
-      final response = await dio.post(
-        ApiConstans.biologyData,
-        data: {'topic': topic},
-        options: Options(
-          headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json',
-            'Authorization': 'Bearer $token'
-          },
-        ),
-      );
-
-      if (response.statusCode == 200) {
-        final biologyData = response.data['data'];
-        final biology = GptModel.fromJson(biologyData);
-        return biology;
-      } else {
-        throw Failure('Failed to get user data: ${response.statusCode}');
-      }
-    } catch (e) {
-      throw Failure('Failed to get user data: $e');
-    }
-  }
-
-  Future<GptModel> fetchHistoryParaphrase({required String topic}) async {
-    try {
-      final token = await tokenManeger.getAccessToken();
-      final response = await dio.post(
-        ApiConstans.historyData,
-        data: {'topic': topic},
-        options: Options(
-          headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json',
-            'Authorization': 'Bearer $token'
-          },
-        ),
-      );
-
-      if (response.statusCode == 200) {
-        final historyData = response.data['data'];
-        final history = GptModel.fromJson(historyData);
-        print(history);
-        return history;
       } else {
         throw Failure('Failed to get user data: ${response.statusCode}');
       }

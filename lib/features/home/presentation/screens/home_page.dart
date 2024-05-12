@@ -42,7 +42,6 @@ class _HomePageState extends State<HomePage> {
           ),
           bottomNavigationBar: Container(
             decoration: BoxDecoration(
-              color: Pallete.white,
               boxShadow: [
                 BoxShadow(
                   color: Colors.black.withOpacity(0.1),

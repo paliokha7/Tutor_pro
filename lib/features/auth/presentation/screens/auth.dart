@@ -83,7 +83,7 @@ class _AuthScreenState extends State<AuthScreen>
               height: 40,
             ),
             SizedBox(
-              height: 420,
+              height: 470,
               child: TabBarView(
                 controller: _tabController,
                 children: const [SignUpPage(), SignInPage()],

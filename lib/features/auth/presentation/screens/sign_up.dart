@@ -27,6 +27,14 @@ class _SignUpPageState extends State<SignUpPage> {
             (route) => false,
           );
         }
+        if (state is AuthInvalidInput) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text('Invalid email or password'),
+              backgroundColor: Colors.red,
+            ),
+          );
+        }
       },
       child: SingleChildScrollView(
         child: Form(
@@ -107,7 +115,7 @@ class _SignUpPageState extends State<SignUpPage> {
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16),
-                child: SignButton(
+                child: Button(
                   text: 'Sign Up',
                   function: () {
                     if (_formKey.currentState!.validate()) {

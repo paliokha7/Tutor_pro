@@ -1,6 +1,5 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
+import 'package:tutor_pro/core/constans/subject_constans.dart';
 import 'package:tutor_pro/features/home/presentation/screens/widgets/pop_up.dart';
 import 'package:tutor_pro/features/home/presentation/screens/widgets/subject.dart';
 import 'package:tutor_pro/theme/pallete.dart';
@@ -34,7 +33,7 @@ class Subjects extends StatelessWidget {
                         context: context,
                         builder: (context) {
                           return const PopUp(
-                            subject: 'literature',
+                            subject: SubjectKey.literature,
                           );
                         });
                   },
@@ -50,7 +49,7 @@ class Subjects extends StatelessWidget {
                         context: context,
                         builder: (context) {
                           return const PopUp(
-                            subject: 'geography',
+                            subject: SubjectKey.geography,
                           );
                         });
                   },
@@ -66,7 +65,7 @@ class Subjects extends StatelessWidget {
                         context: context,
                         builder: (context) {
                           return const PopUp(
-                            subject: 'history',
+                            subject: SubjectKey.history,
                           );
                         });
                   },
@@ -82,7 +81,7 @@ class Subjects extends StatelessWidget {
                         context: context,
                         builder: (context) {
                           return const PopUp(
-                            subject: 'biology',
+                            subject: SubjectKey.biology,
                           );
                         });
                   },

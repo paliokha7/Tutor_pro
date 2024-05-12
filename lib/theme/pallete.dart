@@ -65,9 +65,7 @@ class AppTheme {
         fontWeight: FontWeight.w500,
         color: Pallete.grey,
       ),
-    ),
-    bottomNavigationBarTheme: const BottomNavigationBarThemeData(
-      backgroundColor: Pallete.white,
+      floatingLabelBehavior: FloatingLabelBehavior.always,
     ),
   );
 }

@@ -7,8 +7,12 @@ import 'package:tutor_pro/features/auth/presentation/screens/auth.dart';
 import 'package:tutor_pro/features/home/presentation/cubit/gpt_cubit.dart';
 import 'package:tutor_pro/features/home/presentation/screens/home_page.dart';
 import 'package:tutor_pro/features/home/repository/gpt_repository.dart';
-import 'package:tutor_pro/features/profile/presentation/cubit/user_cubit.dart';
+import 'package:tutor_pro/features/profile/presentation/cubits/payment_cubit/payment_cubit.dart';
+import 'package:tutor_pro/features/profile/presentation/cubits/user_cubit/user_cubit.dart';
+import 'package:tutor_pro/features/profile/repository/payment_repository.dart';
 import 'package:tutor_pro/features/profile/repository/user_repository.dart';
+import 'package:tutor_pro/features/quiz/presentation/cubit/quiz_cubit.dart';
+import 'package:tutor_pro/features/quiz/repository/quiz_repository.dart';
 import 'package:tutor_pro/theme/pallete.dart';
 
 void main() {
@@ -26,6 +30,8 @@ class _MyAppState extends State<MyApp> {
   late AuthCubit _authCubit;
   late UserCubit _userCubit;
   late GptCubit _gptCubit;
+  late PaymentCubit _paymentCubit;
+  late QuizCubit _quizCubit;
 
   late TokenManeger _tokenManager;
 
@@ -36,6 +42,8 @@ class _MyAppState extends State<MyApp> {
     _authCubit = AuthCubit(authRepository: AuthRepository());
     _userCubit = UserCubit(userRepository: UserRepository());
     _gptCubit = GptCubit(gptRepository: GptRepository());
+    _paymentCubit = PaymentCubit(paymentRepository: PaymentRepository());
+    _quizCubit = QuizCubit(quizRepository: QuizRepository());
   }
 
   @override
@@ -45,6 +53,8 @@ class _MyAppState extends State<MyApp> {
         BlocProvider<AuthCubit>.value(value: _authCubit),
         BlocProvider<UserCubit>.value(value: _userCubit),
         BlocProvider<GptCubit>.value(value: _gptCubit),
+        BlocProvider<PaymentCubit>.value(value: _paymentCubit),
+        BlocProvider<QuizCubit>.value(value: _quizCubit)
       ],
       child: MaterialApp(
         theme: AppTheme.lightTheme,

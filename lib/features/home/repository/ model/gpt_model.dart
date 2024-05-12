@@ -9,7 +9,7 @@ class GptModel {
   factory GptModel.fromJson(Map<String, dynamic> json) {
     return GptModel(
       id: json['id'],
-      paraphrase: json['username'],
+      paraphrase: json['paraphrase'],
     );
   }
 

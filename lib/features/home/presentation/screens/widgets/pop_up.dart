@@ -33,6 +33,8 @@ class _PopUpState extends State<PopUp> {
         ),
         TextButton(
           onPressed: () {
+            context.read<GptCubit>().clearData();
+
             final String topic = topicController.text;
             context.read<GptCubit>().fetchData(widget.subject, topic);
             Navigator.push(

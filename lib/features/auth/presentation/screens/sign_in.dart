@@ -5,7 +5,7 @@ import 'package:tutor_pro/features/auth/presentation/cubit/auth_cubit.dart';
 import 'package:tutor_pro/features/home/presentation/screens/home_page.dart';
 
 class SignInPage extends StatefulWidget {
-  const SignInPage({Key? key}) : super(key: key);
+  const SignInPage({super.key});
 
   @override
   State<SignInPage> createState() => _SignInPageState();
@@ -26,11 +26,18 @@ class _SignInPageState extends State<SignInPage> {
             MaterialPageRoute(builder: (_) => const HomePage()),
             (route) => false,
           );
+        } else if (state is AuthInvalidInput) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text('Invalid email or password'),
+              backgroundColor: Colors.red,
+            ),
+          );
         }
       },
       child: SingleChildScrollView(
         child: Form(
-          key: _formKey, // Призначте ключ формі
+          key: _formKey,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
@@ -41,8 +48,10 @@ class _SignInPageState extends State<SignInPage> {
                   children: [
                     const Text(
                       'Email',
-                      style:
-                          TextStyle(fontSize: 14, fontWeight: FontWeight.w600),
+                      style: TextStyle(
+                        fontSize: 14,
+                        fontWeight: FontWeight.w600,
+                      ),
                     ),
                     const SizedBox(height: 4),
                     TextFormField(
@@ -61,8 +70,10 @@ class _SignInPageState extends State<SignInPage> {
                     const SizedBox(height: 20),
                     const Text(
                       'Password',
-                      style:
-                          TextStyle(fontSize: 14, fontWeight: FontWeight.w600),
+                      style: TextStyle(
+                        fontSize: 14,
+                        fontWeight: FontWeight.w600,
+                      ),
                     ),
                     const SizedBox(height: 4),
                     TextFormField(
@@ -84,13 +95,15 @@ class _SignInPageState extends State<SignInPage> {
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16),
-                child: SignButton(
+                child: Button(
                   text: 'Sign In',
                   function: () {
                     if (_formKey.currentState!.validate()) {
                       final email = emailController.text;
                       final password = passwordController.text;
-                      context.read<AuthCubit>().signIn(email, password);
+                      context
+                          .read<AuthCubit>()
+                          .signIn(email, password, context);
                     }
                   },
                 ),

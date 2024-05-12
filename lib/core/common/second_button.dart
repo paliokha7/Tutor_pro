@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:tutor_pro/theme/pallete.dart';
 
-class Button extends StatelessWidget {
+class SecondButton extends StatelessWidget {
   final String text;
   final Function function;
-  const Button({super.key, required this.text, required this.function});
+  const SecondButton({super.key, required this.text, required this.function});
 
   @override
   Widget build(BuildContext context) {
@@ -13,7 +13,7 @@ class Button extends StatelessWidget {
         borderRadius: BorderRadius.circular(12),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.2), // Add null check
+            color: Colors.black.withOpacity(0.2),
             offset: const Offset(7, 7),
             blurRadius: 3,
             spreadRadius: 0,
@@ -23,7 +23,7 @@ class Button extends StatelessWidget {
       child: ElevatedButton(
         onPressed: () => function(),
         style: ElevatedButton.styleFrom(
-          backgroundColor: Pallete.yellow,
+          backgroundColor: Pallete.lightBackground,
           minimumSize: const Size(double.infinity, 49),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(12),
