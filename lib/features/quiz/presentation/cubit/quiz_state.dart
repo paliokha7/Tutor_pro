@@ -30,7 +30,7 @@ class QuizLoaded extends QuizState {
 class QuizError extends QuizState {
   final String errorMessage;
 
-  QuizError(this.errorMessage);
+  const QuizError(this.errorMessage);
 
   @override
   List<Object> get props => [errorMessage];

@@ -6,7 +6,8 @@ class ApiConstans {
   static String getUserData = '$baseUrl/api/user';
   static String subjectsData = '$baseUrl/api/topic-paraphrase/chat';
   static String literatureData =
-      '$baseUrl/api/literature/topic-paraphrase/chat';
+      '$baseUrl/api/topic-paraphrase/literature/chat';
   static String premiumPayment = '$baseUrl/api/user/premium-purchase';
   static String test = '$baseUrl/api/topic-paraphrase/test';
+  static String historyData = '$baseUrl/api/user/history-paraphrase';
 }

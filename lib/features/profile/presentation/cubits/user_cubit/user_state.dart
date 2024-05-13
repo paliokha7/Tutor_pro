@@ -26,3 +26,12 @@ class UserError extends UserState {
   @override
   List<Object> get props => [error];
 }
+
+class UserNotPremium extends UserState {
+  final UserModel user;
+
+  const UserNotPremium({required this.user});
+
+  @override
+  List<Object> get props => [user];
+}

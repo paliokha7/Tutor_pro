@@ -62,74 +62,77 @@ class _ProfileState extends State<Profile> {
       },
       child: Scaffold(
         appBar: AppBar(
-          title: const Text('History'),
+          title: const Text('Профіль'),
           centerTitle: false,
         ),
         body: BlocBuilder<UserCubit, UserState>(
           builder: (context, state) {
             if (state is UserSuccess) {
               final user = state.user;
-              return Padding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 16.0,
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    Text(
-                      user.userName,
-                      style: const TextStyle(
-                          fontSize: 24, fontWeight: FontWeight.bold),
-                    ),
-                    Text(
-                      user.email,
-                      style: const TextStyle(
-                          fontSize: 18, fontWeight: FontWeight.w500),
-                    ),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    GestureDetector(
-                      onTap: () => authCubit.logOut(),
-                      child: const ProfileButton(
-                        text: 'Logout',
-                        textColor: Pallete.red,
-                        svgPicture: Constans.logOutIcon,
-                        color: Pallete.red,
+              return SingleChildScrollView(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const SizedBox(height: 20),
+                      Text(
+                        user.userName,
+                        style: const TextStyle(
+                            fontSize: 24, fontWeight: FontWeight.bold),
                       ),
-                    ),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    ExtendedCard(
-                      color: Pallete.yellow,
-                      title: 'Розширена',
-                      price: '\$90',
-                      feature: 'Надає можливість проходити тести',
-                      text: 'Купити',
-                      function: () => showModalBottomSheet(
-                        context: context,
-                        isScrollControlled: true,
-                        builder: (BuildContext context) {
-                          return MyWidget();
-                        },
+                      Text(
+                        user.email,
+                        style: const TextStyle(
+                            fontSize: 18, fontWeight: FontWeight.w500),
                       ),
-                    ),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    ExtendedCard(
-                      color: Pallete.lightBackground,
-                      title: 'Звичайна',
-                      price: '\$0',
-                      text: 'Продовжити',
-                      function: () => Navigator.push(context,
-                          MaterialPageRoute(builder: (_) => const HomePage())),
-                    ),
-                  ],
+                      const SizedBox(height: 20),
+                      GestureDetector(
+                        onTap: () => authCubit.logOut(),
+                        child: const ProfileButton(
+                          text: 'Вийти',
+                          textColor: Pallete.red,
+                          svgPicture: Constans.logOutIcon,
+                          color: Pallete.red,
+                        ),
+                      ),
+                      if (!user.isPremium)
+                        Column(
+                          children: [
+                            const SizedBox(height: 20),
+                            ExtendedCard(
+                              color: Pallete.yellow,
+                              title: 'Розширена',
+                              price: '\$90',
+                              feature: 'Надає можливість проходити тести',
+                              text: 'Купити',
+                              function: () => showModalBottomSheet(
+                                context: context,
+                                isScrollControlled: true,
+                                builder: (BuildContext context) {
+                                  return const BottomSheetPayment();
+                                },
+                              ),
+                            ),
+                            const SizedBox(height: 20),
+                            ExtendedCard(
+                              color: Pallete.lightBackground,
+                              title: 'Звичайна',
+                              price: '\$0',
+                              text: 'Продовжити',
+                              function: () => Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (_) => const HomePage()),
+                              ),
+                            ),
+                            const SizedBox(
+                              height: 20,
+                            )
+                          ],
+                        ),
+                    ],
+                  ),
                 ),
               );
             } else if (state is UserError) {
@@ -137,7 +140,10 @@ class _ProfileState extends State<Profile> {
                 child: Text('Error: ${state.error}'),
               );
             } else {
-              return const Center(child: CircularProgressIndicator());
+              return const Align(
+                alignment: Alignment.center,
+                child: CircularProgressIndicator(),
+              );
             }
           },
         ),

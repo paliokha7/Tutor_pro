@@ -19,4 +19,12 @@ class UserCubit extends Cubit<UserState> {
       emit(UserError(error: e.toString()));
     }
   }
+
+  bool isPremiumUser() {
+    final userState = state;
+    if (userState is UserSuccess) {
+      return userState.user.isPremium;
+    }
+    return false;
+  }
 }

@@ -1,4 +1,4 @@
-import 'package:bloc/bloc.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:tutor_pro/features/quiz/presentation/scrore_screen.dart';
@@ -10,8 +10,8 @@ part 'quiz_state.dart';
 class QuizCubit extends Cubit<QuizState> {
   final QuizRepository _quizRepository;
   int currentQuestionIndex = 0;
+  List<Question> questions = [];
   int correctAnswers = 0;
-  int incorrectAnswers = 0;
 
   QuizCubit({required QuizRepository quizRepository})
       : _quizRepository = quizRepository,
@@ -22,12 +22,16 @@ class QuizCubit extends Cubit<QuizState> {
     final eitherQuestions =
         await _quizRepository.fetchtestParaphrase(parapharaseId: id);
     eitherQuestions.fold(
-      (failure) => emit(QuizError('Failed to fetch questions: $failure')),
-      (questions) => emit(QuizLoaded(
+        (failure) => emit(QuizError('Failed to fetch questions: $failure')),
+        (questions) {
+      this.questions = questions;
+      currentQuestionIndex = 0;
+      correctAnswers = 0;
+      emit(QuizLoaded(
         questions: questions,
         currentQuestionIndex: currentQuestionIndex,
-      )),
-    );
+      ));
+    });
   }
 
   void getNextQuestion(
@@ -35,37 +39,29 @@ class QuizCubit extends Cubit<QuizState> {
     final currentState = state;
 
     if (currentState is QuizLoaded) {
-      final currentQuestions = currentState.questions;
+      final currentQuestion = currentState.questions[currentQuestionIndex];
 
-      if (currentQuestionIndex < currentQuestions.length - 1) {
-        currentQuestionIndex++;
-      } else {
-        // Reached the last question
-        // Navigate to the score screen
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => ScoreScreen(
-              correctAnswers: correctAnswers,
-              totalQuestions: currentQuestions.length,
-            ),
-          ),
-        );
-      }
-
-      final selectedOption =
-          currentQuestions[currentQuestionIndex].options[selectedOptionIndex];
+      final selectedOption = currentQuestion.options[selectedOptionIndex];
 
       if (selectedOption.isCorrect) {
         correctAnswers++;
-      } else {
-        incorrectAnswers++;
       }
 
-      emit(QuizLoaded(
-        questions: currentQuestions,
-        currentQuestionIndex: currentQuestionIndex,
-      ));
+      if (currentQuestionIndex < questions.length - 1) {
+        currentQuestionIndex++;
+        emit(QuizLoaded(
+          questions: questions,
+          currentQuestionIndex: currentQuestionIndex,
+        ));
+      } else {
+        showDialog(
+          context: context,
+          builder: (_) => ScoreScreen(
+            correctAnswers: correctAnswers,
+            totalQuestions: questions.length,
+          ),
+        );
+      }
     }
   }
 }

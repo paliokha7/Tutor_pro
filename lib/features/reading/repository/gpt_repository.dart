@@ -2,7 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:tutor_pro/core/constans/api_constans.dart';
 import 'package:tutor_pro/core/failure.dart';
 import 'package:tutor_pro/features/auth/%20repository/token_manager.dart';
-import 'package:tutor_pro/features/home/repository/%20model/gpt_model.dart';
+import 'package:tutor_pro/features/reading/repository/%20model/gpt_model.dart';
 
 class GptRepository {
   Dio dio = Dio();
@@ -39,13 +39,14 @@ class GptRepository {
     }
   }
 
-  Future<GptModel> fetchLiteratureParaphrase({required String topic}) async {
+  Future<GptModel> fetchLiteratureParaphrase(
+      {required String topic, required String size}) async {
     try {
       final token = await tokenManeger.getAccessToken();
 
       final response = await dio.post(
         ApiConstans.literatureData,
-        data: {'topic': topic},
+        data: {'topic': topic, "size": size},
         options: Options(
           headers: {
             'Accept': 'application/json',

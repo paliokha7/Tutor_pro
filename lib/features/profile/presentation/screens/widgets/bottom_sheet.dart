@@ -4,14 +4,14 @@ import 'package:flutter_credit_card/flutter_credit_card.dart';
 import 'package:tutor_pro/core/common/sign_button.dart';
 import 'package:tutor_pro/features/profile/presentation/cubits/payment_cubit/payment_cubit.dart';
 
-class MyWidget extends StatefulWidget {
-  const MyWidget({super.key});
+class BottomSheetPayment extends StatefulWidget {
+  const BottomSheetPayment({super.key});
 
   @override
-  State<MyWidget> createState() => _MyWidgetState();
+  State<BottomSheetPayment> createState() => _BottomSheetPaymentState();
 }
 
-class _MyWidgetState extends State<MyWidget> {
+class _BottomSheetPaymentState extends State<BottomSheetPayment> {
   final TextEditingController cardNumberController = TextEditingController();
   final TextEditingController expireController = TextEditingController();
 
@@ -53,6 +53,13 @@ class _MyWidgetState extends State<MyWidget> {
               cardHolderName: cardHolderController.text,
               cvvCode: cvvController.text,
               formKey: formKey,
+              inputConfiguration: const InputConfiguration(
+                cvvCodeDecoration: InputDecoration(
+                  labelText: 'CVV',
+                  hintText: 'XXX',
+                  counterText: '',
+                ),
+              ),
               onCreditCardModelChange: (CreditCardModel data) {
                 setState(() {
                   String cardNumberWithoutSpaces =
@@ -78,6 +85,12 @@ class _MyWidgetState extends State<MyWidget> {
 
                   paymentCubit.payment(cardNumber1, expireDate, cvv);
                   Navigator.pop(context);
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(
+                      content: Text('Оплата пройшла успішно'),
+                      backgroundColor: Colors.green,
+                    ),
+                  );
                 },
               ),
             )

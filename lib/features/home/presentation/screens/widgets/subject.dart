@@ -50,6 +50,7 @@ class SubjectCard extends StatelessWidget {
               subtitle,
               maxLines: null,
               style: const TextStyle(
+                  color: Pallete.black,
                   fontFamily: 'Fixel',
                   fontSize: 14.0,
                   fontWeight: FontWeight.w500),

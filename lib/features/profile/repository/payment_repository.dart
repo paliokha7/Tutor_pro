@@ -44,7 +44,7 @@ class PaymentRepository {
       if (e.response?.statusCode == 422) {
         return left(Failure('422'));
       } else {
-        return left(Failure('Failed to register: ${e.message}'));
+        return left(Failure('Failed to payment: ${e.message}'));
       }
     }
   }

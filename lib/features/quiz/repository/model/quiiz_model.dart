@@ -40,7 +40,7 @@ class Option {
     return Option(
       id: json['id'],
       option: json['option'],
-      isCorrect: json['correct'] == 1,
+      isCorrect: json['correct'] == 1 ? true : false,
     );
   }
 }

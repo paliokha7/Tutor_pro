@@ -4,7 +4,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 import 'package:tutor_pro/core/constans/constans.dart';
 import 'package:tutor_pro/features/auth/presentation/cubit/auth_cubit.dart';
-import 'package:tutor_pro/features/history/history.dart';
+import 'package:tutor_pro/features/history/presentation/screens/history.dart';
 import 'package:tutor_pro/features/home/presentation/screens/list_of_subjects.dart';
 import 'package:tutor_pro/features/profile/presentation/screens/profile.dart';
 import 'package:tutor_pro/theme/pallete.dart';
@@ -36,7 +36,7 @@ class _HomePageState extends State<HomePage> {
             onPageChanged: (index) => setState(() => _selectedIndex = index),
             children: const [
               Subjects(),
-              History(),
+              HistoryPage(),
               Profile(),
             ],
           ),
@@ -73,7 +73,7 @@ class _HomePageState extends State<HomePage> {
                       BlendMode.srcIn,
                     ),
                   ),
-                  title: const Text('Home'),
+                  title: const Text('Дім'),
                   selectedColor: Pallete.lightPurple,
                 ),
                 SalomonBottomBarItem(
@@ -84,7 +84,7 @@ class _HomePageState extends State<HomePage> {
                       BlendMode.srcIn,
                     ),
                   ),
-                  title: const Text('History'),
+                  title: const Text('Історія'),
                   selectedColor: Pallete.lightPurple,
                 ),
                 SalomonBottomBarItem(
@@ -95,7 +95,7 @@ class _HomePageState extends State<HomePage> {
                       BlendMode.srcIn,
                     ),
                   ),
-                  title: const Text('Profile'),
+                  title: const Text('Профіль'),
                   selectedColor: Pallete.lightPurple,
                 ),
               ],

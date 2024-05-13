@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tutor_pro/core/constans/subject_constans.dart';
-import 'package:tutor_pro/features/home/presentation/screens/widgets/pop_up.dart';
+import 'package:tutor_pro/features/home/presentation/screens/input_theme.dart';
 import 'package:tutor_pro/features/home/presentation/screens/widgets/subject.dart';
 import 'package:tutor_pro/theme/pallete.dart';
 
@@ -13,7 +13,7 @@ class Subjects extends StatelessWidget {
       body: CustomScrollView(
         slivers: [
           const SliverAppBar(
-            title: Text('List of Subjects'),
+            title: Text('Список Предметів'),
             centerTitle: false,
           ),
           SliverList(
@@ -25,65 +25,67 @@ class Subjects extends StatelessWidget {
                 GestureDetector(
                   child: const SubjectCard(
                     color: Pallete.lightBlue,
-                    title: 'Literature',
-                    subtitle: 'Read the story and take the test',
+                    title: 'Література',
+                    subtitle: 'Прочитайте переказ та пройдіть тест',
                   ),
                   onTap: () {
-                    showDialog(
-                        context: context,
-                        builder: (context) {
-                          return const PopUp(
-                            subject: SubjectKey.literature,
-                          );
-                        });
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => const InputTheme(
+                          subject: SubjectKey.literature,
+                          showRadioButtons: true,
+                        ),
+                      ),
+                    );
                   },
                 ),
                 GestureDetector(
                   child: const SubjectCard(
                     color: Pallete.lightOrage,
-                    title: 'Geography',
-                    subtitle: 'Read the summary and take the test',
+                    title: 'Географія',
+                    subtitle: 'Прочитайте коспект та пройдіть тест',
                   ),
                   onTap: () {
-                    showDialog(
-                        context: context,
-                        builder: (context) {
-                          return const PopUp(
-                            subject: SubjectKey.geography,
-                          );
-                        });
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) =>
+                            const InputTheme(subject: SubjectKey.geography),
+                      ),
+                    );
                   },
                 ),
                 GestureDetector(
                   child: const SubjectCard(
                     color: Pallete.lightRed,
-                    title: 'History',
-                    subtitle: 'Read the summary and take the test',
+                    title: 'Історія',
+                    subtitle: 'Прочитайте коспект та пройдіть тест',
                   ),
                   onTap: () {
-                    showDialog(
-                        context: context,
-                        builder: (context) {
-                          return const PopUp(
-                            subject: SubjectKey.history,
-                          );
-                        });
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) =>
+                            const InputTheme(subject: SubjectKey.history),
+                      ),
+                    );
                   },
                 ),
                 GestureDetector(
                   child: const SubjectCard(
                     color: Pallete.green,
-                    title: 'Biology',
-                    subtitle: 'Read the summary and take the test',
+                    title: 'Біологія',
+                    subtitle: 'Прочитайте коспект та пройдіть тест',
                   ),
                   onTap: () {
-                    showDialog(
-                        context: context,
-                        builder: (context) {
-                          return const PopUp(
-                            subject: SubjectKey.biology,
-                          );
-                        });
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) =>
+                            const InputTheme(subject: SubjectKey.biology),
+                      ),
+                    );
                   },
                 ),
               ],

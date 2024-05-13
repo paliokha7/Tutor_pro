@@ -12,8 +12,9 @@ class Pallete {
   static const Color lightOrage = Color(0xFFFECCB5);
   static const Color lightRed = Color(0xFFD28181);
   static const Color red = Color(0xFFF24822);
-
   static const Color green = Color(0xFF57A990);
+
+  static const Color darkBackground = Color(0XFF1F1F1F);
 }
 
 class AppTheme {
@@ -64,6 +65,58 @@ class AppTheme {
         fontSize: 14,
         fontWeight: FontWeight.w500,
         color: Pallete.grey,
+      ),
+      floatingLabelBehavior: FloatingLabelBehavior.always,
+    ),
+  );
+
+  static final ThemeData dartTheme = ThemeData(
+    scaffoldBackgroundColor: Pallete.darkBackground,
+    appBarTheme: const AppBarTheme(
+      backgroundColor: Pallete.darkBackground,
+      centerTitle: false,
+      titleTextStyle: TextStyle(
+          fontFamily: 'Fixel',
+          fontSize: 22,
+          fontWeight: FontWeight.bold,
+          color: Pallete.lightBackground),
+    ),
+    textTheme: const TextTheme(
+      bodyLarge: TextStyle(fontFamily: 'Fixel', color: Pallete.white),
+      bodyMedium: TextStyle(fontFamily: 'Fixel', color: Pallete.white),
+      displayLarge: TextStyle(fontFamily: 'Fixel', color: Pallete.white),
+      displayMedium: TextStyle(fontFamily: 'Fixel', color: Pallete.white),
+      displaySmall: TextStyle(fontFamily: 'Fixel', color: Pallete.white),
+    ),
+    inputDecorationTheme: InputDecorationTheme(
+      contentPadding: const EdgeInsets.only(
+        top: 16,
+        bottom: 16,
+        left: 24,
+      ),
+      fillColor: Pallete.darkBackground,
+      border: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(12.0),
+      ),
+      focusedBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(12.0),
+        borderSide: const BorderSide(
+          width: 2.0,
+          color: Pallete.lightBackground,
+        ),
+      ),
+      enabledBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(12.0),
+        borderSide: const BorderSide(
+          width: 2.0,
+          color: Pallete.grey,
+        ),
+      ),
+      hintStyle: const TextStyle(
+        fontFamily: 'Fixel',
+        fontSize: 14,
+        fontWeight: FontWeight.w500,
+        color: Pallete.lightBackground,
       ),
       floatingLabelBehavior: FloatingLabelBehavior.always,
     ),

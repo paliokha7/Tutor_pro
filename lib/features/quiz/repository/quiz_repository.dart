@@ -35,7 +35,6 @@ class QuizRepository {
         for (var questionData in responseData) {
           questions.add(Question.fromJson(questionData));
         }
-
         return right(questions);
       } else {
         throw left(Failure('Failed to get quiz data: ${response.statusCode}'));

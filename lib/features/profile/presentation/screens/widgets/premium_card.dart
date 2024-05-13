@@ -34,7 +34,6 @@ class ExtendedCard extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                //   'Розширена'
                 title,
                 style: const TextStyle(
                     fontSize: 32.0,
@@ -42,7 +41,6 @@ class ExtendedCard extends StatelessWidget {
                     color: Pallete.black),
               ),
               Text(
-                //'\$90',
                 price,
                 style: const TextStyle(
                   fontSize: 22.0,

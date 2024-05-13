@@ -7,6 +7,7 @@ part 'payment_state.dart';
 
 class PaymentCubit extends Cubit<PaymentState> {
   final PaymentRepository _paymentRepository;
+
   PaymentCubit({required PaymentRepository paymentRepository})
       : _paymentRepository = paymentRepository,
         super(PaymentInitial());
@@ -14,11 +15,10 @@ class PaymentCubit extends Cubit<PaymentState> {
   void payment(String cardNumber, String expireDate, String cvv) async {
     final result = await _paymentRepository.premiumPayment(
         cardNumber: cardNumber, expireDate: expireDate, cvv: cvv);
+
     result.fold(
       (failure) {
         if (failure.message == '422') {
-          emit(PaymentAlready());
-        } else {
           emit(PaymentError(error: failure.toString()));
         }
       },
