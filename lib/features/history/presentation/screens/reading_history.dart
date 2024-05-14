@@ -8,7 +8,7 @@ import 'package:tutor_pro/features/profile/presentation/cubits/user_cubit/user_c
 class HistoryReading extends StatefulWidget {
   final ParaphraseModel paraphrase;
 
-  const HistoryReading({super.key, required this.paraphrase});
+  const HistoryReading({Key? key, required this.paraphrase}) : super(key: key);
 
   @override
   State<HistoryReading> createState() => _HistoryReadingState();
@@ -53,18 +53,19 @@ class _HistoryReadingState extends State<HistoryReading> {
                   const SizedBox(
                     height: 20,
                   ),
-                  Button(
-                    text: 'Пройти тест',
-                    function: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => QuizPageHistory(
-                              questions: widget.paraphrase.questions),
-                        ),
-                      );
-                    },
-                  ),
+                  if (widget.paraphrase.questions.isNotEmpty)
+                    Button(
+                      text: 'Пройти тест',
+                      function: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => QuizPageHistory(
+                                questions: widget.paraphrase.questions),
+                          ),
+                        );
+                      },
+                    ),
                   const SizedBox(
                     height: 20,
                   )

@@ -5,7 +5,7 @@ import 'package:tutor_pro/core/common/sign_button.dart';
 import 'package:tutor_pro/features/profile/presentation/cubits/payment_cubit/payment_cubit.dart';
 
 class BottomSheetPayment extends StatefulWidget {
-  const BottomSheetPayment({super.key});
+  const BottomSheetPayment({Key? key}) : super(key: key);
 
   @override
   State<BottomSheetPayment> createState() => _BottomSheetPaymentState();
@@ -14,7 +14,6 @@ class BottomSheetPayment extends StatefulWidget {
 class _BottomSheetPaymentState extends State<BottomSheetPayment> {
   final TextEditingController cardNumberController = TextEditingController();
   final TextEditingController expireController = TextEditingController();
-
   final TextEditingController cvvController = TextEditingController();
   final TextEditingController cardHolderController = TextEditingController();
   final formKey = GlobalKey<FormState>();
@@ -43,7 +42,7 @@ class _BottomSheetPaymentState extends State<BottomSheetPayment> {
             const Padding(
               padding: EdgeInsets.symmetric(horizontal: 16),
               child: Text(
-                'Введіть ваші данні',
+                'Введіть ваші дані',
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
               ),
             ),
@@ -79,18 +78,32 @@ class _BottomSheetPaymentState extends State<BottomSheetPayment> {
               child: Button(
                 text: 'Купити',
                 function: () {
-                  final cardNumber1 = cardNumberController.text;
-                  final expireDate = expireController.text;
-                  final cvv = cvvController.text;
+                  // Перевірка на пустоту кожного поля
+                  if (cardNumberController.text.isEmpty ||
+                      expireController.text.isEmpty ||
+                      cvvController.text.isEmpty) {
+                    Navigator.pop(context);
 
-                  paymentCubit.payment(cardNumber1, expireDate, cvv);
-                  Navigator.pop(context);
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(
-                      content: Text('Оплата пройшла успішно'),
-                      backgroundColor: Colors.green,
-                    ),
-                  );
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        content: Text('Будь ласка, заповніть всі поля'),
+                        backgroundColor: Colors.red,
+                      ),
+                    );
+                  } else {
+                    final cardNumber1 = cardNumberController.text;
+                    final expireDate = expireController.text;
+                    final cvv = cvvController.text;
+
+                    paymentCubit.payment(cardNumber1, expireDate, cvv);
+                    Navigator.pop(context);
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        content: Text('Оплата пройшла успішно'),
+                        backgroundColor: Colors.green,
+                      ),
+                    );
+                  }
                 },
               ),
             )
