@@ -1,6 +1,8 @@
 import 'package:dio/dio.dart';
+import 'package:fpdart/fpdart.dart';
 import 'package:tutor_pro/core/constans/api_constans.dart';
 import 'package:tutor_pro/core/failure.dart';
+import 'package:tutor_pro/core/type_defs.dart';
 import 'package:tutor_pro/features/auth/%20repository/token_manager.dart';
 import 'package:tutor_pro/features/reading/repository/%20model/gpt_model.dart';
 
@@ -10,7 +12,7 @@ class GptRepository {
 
   GptRepository();
 
-  Future<GptModel> fetchSubjectsParaphrase(
+  FutureEither<GptModel> fetchSubjectsParaphrase(
       {required String topic, required String subject}) async {
     try {
       final token = await tokenManeger.getAccessToken();
@@ -28,18 +30,18 @@ class GptRepository {
       );
 
       if (response.statusCode == 200) {
-        final geographyData = response.data['data'];
-        final geography = GptModel.fromJson(geographyData);
-        return geography;
+        final subjectsData = response.data['data'];
+        final subject = GptModel.fromJson(subjectsData);
+        return right(subject);
       } else {
-        throw Failure('Failed to get user data: ${response.statusCode}');
+        return left(Failure('Failed to get user data: ${response.statusCode}'));
       }
     } catch (e) {
-      throw Failure('Failed to get user data: $e');
+      throw left(Failure('Failed to get user data: $e'));
     }
   }
 
-  Future<GptModel> fetchLiteratureParaphrase(
+  FutureEither<GptModel> fetchLiteratureParaphrase(
       {required String topic, required String size}) async {
     try {
       final token = await tokenManeger.getAccessToken();
@@ -59,12 +61,12 @@ class GptRepository {
       if (response.statusCode == 200) {
         final literatureData = response.data['data'];
         final literature = GptModel.fromJson(literatureData);
-        return literature;
+        return right(literature);
       } else {
-        throw Failure('Failed to get user data: ${response.statusCode}');
+        return left(Failure('Failed to get user data: ${response.statusCode}'));
       }
     } catch (e) {
-      throw Failure('Failed to get user data: $e');
+      return left(Failure('Failed to get user data: $e'));
     }
   }
 }

@@ -12,12 +12,11 @@ class UserCubit extends Cubit<UserState> {
         super(UserInitial());
 
   void getUserData() async {
-    try {
-      final user = await _userRepository.getUserData();
-      emit(UserSuccess(user: user));
-    } catch (e) {
-      emit(UserError(error: e.toString()));
-    }
+    final userDataEither = await _userRepository.getUserData();
+    userDataEither.fold(
+      (failure) => emit(UserError(error: failure.message)),
+      (user) => emit(UserSuccess(user: user)),
+    );
   }
 
   bool isPremiumUser() {
