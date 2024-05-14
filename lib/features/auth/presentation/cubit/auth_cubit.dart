@@ -1,10 +1,8 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tutor_pro/features/auth/%20repository/auth_service_impl.dart';
 import 'package:tutor_pro/features/auth/%20repository/model/user_model.dart';
-import 'package:tutor_pro/features/auth/%20repository/token_manager.dart';
 
 part 'auth_state.dart';
 

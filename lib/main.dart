@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:tutor_pro/core/routes/routes.dart';
 import 'package:tutor_pro/features/auth/%20repository/auth_service_impl.dart';
 import 'package:tutor_pro/features/auth/%20repository/token_manager.dart';
 import 'package:tutor_pro/features/auth/presentation/cubit/auth_cubit.dart';
-import 'package:tutor_pro/features/auth/presentation/screens/auth.dart';
 import 'package:tutor_pro/features/history/presentation/cubits/history_cubit/history_cubit.dart';
 import 'package:tutor_pro/features/history/repository/history_repository.dart';
 import 'package:tutor_pro/features/reading/presentation/cubit/gpt_cubit.dart';
@@ -19,12 +17,14 @@ import 'package:tutor_pro/features/quiz/repository/quiz_repository.dart';
 import 'package:tutor_pro/theme/cubit/theme_cubit.dart';
 import 'package:tutor_pro/theme/pallete.dart';
 
+import 'features/auth/presentation/screens/auth.dart';
+
 void main() {
   runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {

@@ -48,7 +48,7 @@ class _SignUpPageState extends State<SignUpPage> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const Text(
-                      'Username',
+                      'Ім`я',
                       style:
                           TextStyle(fontSize: 14, fontWeight: FontWeight.w600),
                     ),
@@ -56,19 +56,19 @@ class _SignUpPageState extends State<SignUpPage> {
                     TextFormField(
                       controller: userNameController,
                       decoration: const InputDecoration(
-                        hintText: 'Enter your username',
+                        hintText: 'Введіть ваше ім`я',
                       ),
                       keyboardType: TextInputType.emailAddress,
                       validator: (value) {
                         if (value!.isEmpty) {
-                          return 'Please enter your username';
+                          return 'Введіть ваше ім`я';
                         }
                         return null;
                       },
                     ),
                     const SizedBox(height: 20),
                     const Text(
-                      'Email',
+                      'Електронна почта',
                       style:
                           TextStyle(fontSize: 14, fontWeight: FontWeight.w600),
                     ),
@@ -76,19 +76,19 @@ class _SignUpPageState extends State<SignUpPage> {
                     TextFormField(
                       controller: emailController,
                       decoration: const InputDecoration(
-                        hintText: 'Enter your email',
+                        hintText: 'Введіть почту',
                       ),
                       keyboardType: TextInputType.emailAddress,
                       validator: (value) {
                         if (value!.isEmpty) {
-                          return 'Invalid email';
+                          return 'Введіть почту';
                         }
                         return null;
                       },
                     ),
                     const SizedBox(height: 20),
                     const Text(
-                      'Password',
+                      'Пароль',
                       style:
                           TextStyle(fontSize: 14, fontWeight: FontWeight.w600),
                     ),
@@ -96,15 +96,15 @@ class _SignUpPageState extends State<SignUpPage> {
                     TextFormField(
                       controller: passwordController,
                       decoration: const InputDecoration(
-                        hintText: 'Enter your password',
+                        hintText: 'Введіть ваш пароль',
                       ),
                       obscureText: true,
                       validator: (value) {
                         if (value!.isEmpty) {
-                          return 'Please enter your password';
+                          return 'Введіть ваш пароль';
                         }
                         if (value.length < 6) {
-                          return 'Password must be at least 6 characters long';
+                          return 'Пароль має бути більше 6 символів';
                         }
                         return null;
                       },
@@ -116,7 +116,7 @@ class _SignUpPageState extends State<SignUpPage> {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16),
                 child: Button(
-                  text: 'Sign Up',
+                  text: 'Зареєструватися',
                   function: () {
                     if (_formKey.currentState!.validate()) {
                       final userName = userNameController.text;

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:tutor_pro/features/quiz/presentation/cubit/quiz_cubit.dart';
 import 'package:tutor_pro/theme/pallete.dart';
 
@@ -109,8 +110,12 @@ class QuizPage extends StatelessWidget {
               ),
             );
           } else if (state is QuizLoading) {
-            return const Center(
-              child: CircularProgressIndicator(),
+            return const Align(
+              alignment: Alignment.center,
+              child: SpinKitWanderingCubes(
+                color: Pallete.lightPurple,
+                size: 50.0,
+              ),
             );
           } else if (state is QuizError) {
             return Center(

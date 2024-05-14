@@ -76,6 +76,9 @@ class AppTheme {
   );
 
   static final ThemeData dartTheme = ThemeData(
+    bottomSheetTheme: const BottomSheetThemeData(
+      backgroundColor: Pallete.darkBackground,
+    ),
     dialogTheme: const DialogTheme(backgroundColor: Pallete.darkBackground),
     scaffoldBackgroundColor: Pallete.darkBackground,
     appBarTheme: const AppBarTheme(
@@ -103,10 +106,11 @@ class AppTheme {
         bottom: 16,
         left: 24,
       ),
-      fillColor: Pallete.grey,
       border: OutlineInputBorder(
         borderRadius: BorderRadius.circular(12.0),
       ),
+      labelStyle: const TextStyle(color: Pallete.lightBackground),
+      floatingLabelStyle: const TextStyle(color: Pallete.lightBackground),
       focusedBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(12.0),
         borderSide: const BorderSide(

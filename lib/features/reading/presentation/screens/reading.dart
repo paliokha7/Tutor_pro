@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:tutor_pro/core/common/sign_button.dart';
 import 'package:tutor_pro/features/reading/presentation/cubit/gpt_cubit.dart';
 import 'package:tutor_pro/features/profile/presentation/cubits/user_cubit/user_cubit.dart';
 import 'package:tutor_pro/features/quiz/presentation/cubit/quiz_cubit.dart';
 import 'package:tutor_pro/features/quiz/presentation/quiz_page.dart';
+import 'package:tutor_pro/theme/pallete.dart';
 
 class Reading extends StatefulWidget {
   const Reading({super.key});
@@ -80,7 +82,10 @@ class _ReadingState extends State<Reading> {
                                 const SnackBar(
                                   content: Text(
                                     'Для проходження тесту потрібен преміум-доступ.',
+                                    style: TextStyle(
+                                        color: Pallete.lightBackground),
                                   ),
+                                  backgroundColor: Colors.red,
                                 ),
                               );
                             }
@@ -102,8 +107,12 @@ class _ReadingState extends State<Reading> {
           );
         } else {
           return const Scaffold(
-            body: Center(
-              child: CircularProgressIndicator(),
+            body: Align(
+              alignment: Alignment.center,
+              child: SpinKitWanderingCubes(
+                color: Pallete.lightPurple,
+                size: 50.0,
+              ),
             ),
           );
         }

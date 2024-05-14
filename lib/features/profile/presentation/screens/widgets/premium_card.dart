@@ -62,7 +62,7 @@ class ExtendedCard extends StatelessWidget {
                 const SizedBox(height: 8.0),
                 Text(
                   feature!,
-                  style: TextStyle(fontSize: 16.0, color: Pallete.black),
+                  style: const TextStyle(fontSize: 16.0, color: Pallete.black),
                 ),
               ],
             ),

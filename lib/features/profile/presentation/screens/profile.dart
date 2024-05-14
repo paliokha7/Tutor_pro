@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 import 'package:tutor_pro/core/constans/constans.dart';
 import 'package:tutor_pro/features/auth/presentation/cubit/auth_cubit.dart';
@@ -68,6 +69,7 @@ class _ProfileState extends State<Profile> {
         appBar: AppBar(
           title: const Text('Профіль'),
           centerTitle: false,
+          backgroundColor: Colors.transparent,
           actions: [
             BlocBuilder<ThemeCubit, ThemeMode>(
               builder: (context, state) {
@@ -158,7 +160,10 @@ class _ProfileState extends State<Profile> {
             } else {
               return const Align(
                 alignment: Alignment.center,
-                child: CircularProgressIndicator(),
+                child: SpinKitWanderingCubes(
+                  color: Pallete.lightPurple,
+                  size: 50.0,
+                ),
               );
             }
           },

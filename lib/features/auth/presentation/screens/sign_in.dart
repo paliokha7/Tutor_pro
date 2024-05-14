@@ -29,7 +29,7 @@ class _SignInPageState extends State<SignInPage> {
         } else if (state is AuthInvalidInput) {
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(
-              content: Text('Invalid email or password'),
+              content: Text('Не правильний пароль або почта'),
               backgroundColor: Colors.red,
             ),
           );
@@ -47,7 +47,7 @@ class _SignInPageState extends State<SignInPage> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const Text(
-                      'Email',
+                      'Електронна почта',
                       style: TextStyle(
                         fontSize: 14,
                         fontWeight: FontWeight.w600,
@@ -57,19 +57,19 @@ class _SignInPageState extends State<SignInPage> {
                     TextFormField(
                       controller: emailController,
                       decoration: const InputDecoration(
-                        hintText: 'Enter your email',
+                        hintText: 'Введіть вашу почту',
                       ),
                       keyboardType: TextInputType.emailAddress,
                       validator: (value) {
                         if (value!.isEmpty) {
-                          return 'Please enter your email';
+                          return 'Введіть вашу почту';
                         }
                         return null;
                       },
                     ),
                     const SizedBox(height: 20),
                     const Text(
-                      'Password',
+                      'Пароль',
                       style: TextStyle(
                         fontSize: 14,
                         fontWeight: FontWeight.w600,
@@ -79,12 +79,12 @@ class _SignInPageState extends State<SignInPage> {
                     TextFormField(
                       controller: passwordController,
                       decoration: const InputDecoration(
-                        hintText: 'Enter your password',
+                        hintText: 'Введіть ваш пароль',
                       ),
                       obscureText: true,
                       validator: (value) {
                         if (value!.isEmpty) {
-                          return 'Please enter your password';
+                          return 'Введіть ваш пароль';
                         }
                         return null;
                       },
@@ -96,7 +96,7 @@ class _SignInPageState extends State<SignInPage> {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16),
                 child: Button(
-                  text: 'Sign In',
+                  text: 'Увійти',
                   function: () {
                     if (_formKey.currentState!.validate()) {
                       final email = emailController.text;

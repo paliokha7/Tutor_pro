@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:intl/intl.dart';
 import 'package:tutor_pro/features/history/presentation/cubits/history_cubit/history_cubit.dart';
 import 'package:tutor_pro/features/history/presentation/screens/reading_history.dart';
@@ -37,12 +38,16 @@ class _HistoryPageState extends State<HistoryPage> {
       ),
       body: BlocBuilder<HistoryCubit, HistoryState>(
         builder: (context, state) {
-          if (state is HistoryLoading) {
-            return const Center(
-              child: CircularProgressIndicator(),
-            );
-          } else if (state is HistoryLoaded) {
+          if (state is HistoryLoaded) {
             return _buildHistoryList(state.historyList);
+          } else if (state is HistoryLoading) {
+            return const Align(
+              alignment: Alignment.center,
+              child: SpinKitWanderingCubes(
+                color: Pallete.lightPurple,
+                size: 50.0,
+              ),
+            );
           } else if (state is HistoryError) {
             return Center(
                 child: Text(
@@ -50,12 +55,7 @@ class _HistoryPageState extends State<HistoryPage> {
               style: const TextStyle(color: Pallete.white),
             ));
           } else {
-            return const Center(
-              child: Text(
-                'Невідомий стан!',
-                style: TextStyle(color: Pallete.white),
-              ),
-            );
+            return const SizedBox();
           }
         },
       ),
