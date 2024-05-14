@@ -79,7 +79,9 @@ class _HistoryPageState extends State<HistoryPage> {
                   title: Text(
                     paraphrase.topic,
                     style: const TextStyle(
-                        fontSize: 14, fontWeight: FontWeight.w500),
+                        fontSize: 14,
+                        fontWeight: FontWeight.w500,
+                        color: Pallete.black),
                   ),
                   subtitle: Row(
                     crossAxisAlignment: CrossAxisAlignment.center,
@@ -92,6 +94,7 @@ class _HistoryPageState extends State<HistoryPage> {
                             paraphrase.subject.isNotEmpty
                                 ? '${paraphrase.subject[0].toUpperCase()}${paraphrase.subject.substring(1)}'
                                 : '',
+                            style: const TextStyle(color: Pallete.black),
                           ),
                         ],
                       ),

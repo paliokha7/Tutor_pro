@@ -31,7 +31,6 @@ class _QuizPageHistoryState extends State<QuizPageHistory> {
     showDialog(
       context: context,
       builder: (context) => Dialog(
-        backgroundColor: Colors.white,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(16),
         ),
@@ -144,9 +143,9 @@ class _QuizPageHistoryState extends State<QuizPageHistory> {
                     child: Text(
                       widget.questions[currentQuestionIndex].options[i].option,
                       style: const TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w600,
-                      ),
+                          fontSize: 16,
+                          fontWeight: FontWeight.w600,
+                          color: Pallete.black),
                     ),
                   ),
                   onTap: () {

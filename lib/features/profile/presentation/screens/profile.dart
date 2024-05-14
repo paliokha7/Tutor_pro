@@ -9,6 +9,7 @@ import 'package:tutor_pro/features/profile/presentation/cubits/user_cubit/user_c
 import 'package:tutor_pro/features/profile/presentation/screens/widgets/bottom_sheet.dart';
 import 'package:tutor_pro/features/profile/presentation/screens/widgets/premium_card.dart';
 import 'package:tutor_pro/features/profile/presentation/screens/widgets/profile_button.dart';
+import 'package:tutor_pro/theme/cubit/theme_cubit.dart';
 import 'package:tutor_pro/theme/pallete.dart';
 
 class Profile extends StatefulWidget {
@@ -48,8 +49,11 @@ class _ProfileState extends State<Profile> {
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(
+    BuildContext context,
+  ) {
     final authCubit = context.read<AuthCubit>();
+
     return BlocListener<AuthCubit, AuthState>(
       listener: (context, state) {
         if (state is LogOut) {
@@ -64,6 +68,18 @@ class _ProfileState extends State<Profile> {
         appBar: AppBar(
           title: const Text('Профіль'),
           centerTitle: false,
+          actions: [
+            BlocBuilder<ThemeCubit, ThemeMode>(
+              builder: (context, state) {
+                return Switch.adaptive(
+                  value: state == ThemeMode.light,
+                  onChanged: (value) {
+                    context.read<ThemeCubit>().toggleTheme();
+                  },
+                );
+              },
+            ),
+          ],
         ),
         body: BlocBuilder<UserCubit, UserState>(
           builder: (context, state) {

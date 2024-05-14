@@ -43,7 +43,7 @@ class _AuthScreenState extends State<AuthScreen>
                 style: TextStyle(
                     fontSize: 48,
                     fontWeight: FontWeight.bold,
-                    color: Pallete.purple),
+                    color: Pallete.lightPurple),
               ),
             ),
             const SizedBox(
@@ -53,8 +53,6 @@ class _AuthScreenState extends State<AuthScreen>
               padding: const EdgeInsets.symmetric(horizontal: 16),
               child: TabBar(
                 isScrollable: false,
-                labelColor: const Color(0xFF101213),
-                unselectedLabelColor: const Color(0xFF57636C),
                 labelPadding: const EdgeInsets.only(right: 30),
                 labelStyle: const TextStyle(
                   fontFamily: 'Fixel',
@@ -70,7 +68,6 @@ class _AuthScreenState extends State<AuthScreen>
                   letterSpacing: 0,
                   fontWeight: FontWeight.bold,
                 ),
-                indicatorColor: Pallete.purple,
                 indicatorWeight: 4,
                 controller: _tabController,
                 tabs: const [

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tutor_pro/core/common/sign_button.dart';
 import 'package:tutor_pro/features/home/presentation/screens/home_page.dart';
-import 'package:tutor_pro/theme/pallete.dart';
 
 class ScoreScreen extends StatelessWidget {
   final int correctAnswers;
@@ -15,7 +14,6 @@ class ScoreScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Dialog(
-      backgroundColor: Pallete.white,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(16),
       ),

@@ -46,7 +46,9 @@ class _HistoryReadingState extends State<HistoryReading> {
                   Text(
                     widget.paraphrase.paraphrase,
                     style: const TextStyle(
-                        fontSize: 16, fontWeight: FontWeight.w500),
+                      fontSize: 16,
+                      fontWeight: FontWeight.w500,
+                    ),
                   ),
                   const SizedBox(
                     height: 20,

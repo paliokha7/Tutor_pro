@@ -15,72 +15,70 @@ import 'package:tutor_pro/features/profile/repository/payment_repository.dart';
 import 'package:tutor_pro/features/profile/repository/user_repository.dart';
 import 'package:tutor_pro/features/quiz/presentation/cubit/quiz_cubit.dart';
 import 'package:tutor_pro/features/quiz/repository/quiz_repository.dart';
+import 'package:tutor_pro/theme/cubit/theme_cubit.dart';
 import 'package:tutor_pro/theme/pallete.dart';
 
 void main() {
   runApp(const MyApp());
 }
 
-class MyApp extends StatefulWidget {
-  const MyApp({super.key});
-
-  @override
-  State<MyApp> createState() => _MyAppState();
-}
-
-class _MyAppState extends State<MyApp> {
-  late AuthCubit _authCubit;
-  late UserCubit _userCubit;
-  late GptCubit _gptCubit;
-  late PaymentCubit _paymentCubit;
-  late QuizCubit _quizCubit;
-  late HistoryCubit _historyCubit;
-
-  late TokenManeger _tokenManager;
-
-  @override
-  void initState() {
-    super.initState();
-    _tokenManager = TokenManeger();
-    _authCubit = AuthCubit(authRepository: AuthRepository());
-    _userCubit = UserCubit(userRepository: UserRepository());
-    _gptCubit = GptCubit(gptRepository: GptRepository());
-    _paymentCubit = PaymentCubit(paymentRepository: PaymentRepository());
-    _quizCubit = QuizCubit(quizRepository: QuizRepository());
-    _historyCubit = HistoryCubit(historyRepository: HistoryRepository());
-  }
+class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider<AuthCubit>.value(value: _authCubit),
-        BlocProvider<UserCubit>.value(value: _userCubit),
-        BlocProvider<GptCubit>.value(value: _gptCubit),
-        BlocProvider<PaymentCubit>.value(value: _paymentCubit),
-        BlocProvider<QuizCubit>.value(value: _quizCubit),
-        BlocProvider<HistoryCubit>.value(value: _historyCubit),
-      ],
-      child: MaterialApp(
-        theme: AppTheme.lightTheme,
-        home: FutureBuilder<String?>(
-          future: _tokenManager.getAccessToken(),
-          builder: (context, snapshot) {
-            if (snapshot.connectionState == ConnectionState.waiting) {
-              return const Scaffold(
-                body: Center(
-                  child: CircularProgressIndicator(),
-                ),
-              );
-            } else {
-              if (snapshot.hasData && snapshot.data != null) {
-                return const HomePage();
-              } else {
-                return const AuthScreen();
-              }
-            }
-          },
+        BlocProvider<AuthCubit>(
+          create: (context) => AuthCubit(authRepository: AuthRepository()),
         ),
+        BlocProvider<UserCubit>(
+          create: (context) => UserCubit(userRepository: UserRepository()),
+        ),
+        BlocProvider<GptCubit>(
+          create: (context) => GptCubit(gptRepository: GptRepository()),
+        ),
+        BlocProvider<PaymentCubit>(
+          create: (context) =>
+              PaymentCubit(paymentRepository: PaymentRepository()),
+        ),
+        BlocProvider<QuizCubit>(
+          create: (context) => QuizCubit(quizRepository: QuizRepository()),
+        ),
+        BlocProvider<HistoryCubit>(
+          create: (context) =>
+              HistoryCubit(historyRepository: HistoryRepository()),
+        ),
+        BlocProvider<ThemeCubit>(
+          create: (context) => ThemeCubit(),
+        ),
+      ],
+      child: BlocBuilder<ThemeCubit, ThemeMode>(
+        builder: (context, themeMode) {
+          return MaterialApp(
+            theme: themeMode == ThemeMode.light
+                ? AppTheme.lightTheme
+                : AppTheme.dartTheme,
+            home: FutureBuilder<String?>(
+              future: TokenManeger().getAccessToken(),
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return const Scaffold(
+                    body: Center(
+                      child: CircularProgressIndicator(),
+                    ),
+                  );
+                } else {
+                  if (snapshot.hasData && snapshot.data != null) {
+                    return const HomePage();
+                  } else {
+                    return const AuthScreen();
+                  }
+                }
+              },
+            ),
+          );
+        },
       ),
     );
   }

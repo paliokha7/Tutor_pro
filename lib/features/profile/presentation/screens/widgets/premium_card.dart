@@ -53,16 +53,16 @@ class ExtendedCard extends StatelessWidget {
           const SizedBox(height: 16.0),
           const Text(
             'Надає стислий твір та коспекти',
-            style: TextStyle(fontSize: 16.0),
+            style: TextStyle(fontSize: 16.0, color: Pallete.black),
           ),
           const SizedBox(height: 8.0),
-          if (feature != null) // Перевірка на нуль
+          if (feature != null)
             Column(
               children: [
                 const SizedBox(height: 8.0),
                 Text(
                   feature!,
-                  style: const TextStyle(fontSize: 16.0),
+                  style: TextStyle(fontSize: 16.0, color: Pallete.black),
                 ),
               ],
             ),

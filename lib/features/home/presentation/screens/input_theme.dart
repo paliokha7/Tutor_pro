@@ -75,9 +75,9 @@ class _InputThemeState extends State<InputTheme> {
                         const Text(
                           'Тип переказу: ',
                           style: TextStyle(
-                            fontSize: 14,
-                            fontWeight: FontWeight.w700,
-                          ),
+                              fontSize: 14,
+                              fontWeight: FontWeight.w700,
+                              color: Pallete.black),
                         ),
                         Text(
                           summaryType == 'short' ? 'Стислий' : 'Розгорнутий',

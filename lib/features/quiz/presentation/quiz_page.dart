@@ -88,9 +88,9 @@ class QuizPage extends StatelessWidget {
                                   child: Text(
                                     option.option,
                                     style: const TextStyle(
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.w600,
-                                    ),
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w600,
+                                        color: Pallete.black),
                                   ),
                                 ),
                                 onTap: () {

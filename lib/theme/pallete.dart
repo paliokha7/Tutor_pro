@@ -5,7 +5,7 @@ class Pallete {
   static const Color purple = Color(0xFF341F58);
   static const Color yellow = Color(0xFFFEC447);
   static const Color black = Color(0xFF000000);
-  static const Color grey = Color(0xFF787878);
+  static const Color grey = Color(0xFF757575);
   static const Color white = Color(0xFFFFFFFF);
   static const Color lightPurple = Color(0xFF9747FF);
   static const Color lightBlue = Color(0xFF9BD3D0);
@@ -13,28 +13,28 @@ class Pallete {
   static const Color lightRed = Color(0xFFD28181);
   static const Color red = Color(0xFFF24822);
   static const Color green = Color(0xFF57A990);
-
   static const Color darkBackground = Color(0XFF1F1F1F);
 }
 
 class AppTheme {
   static final ThemeData lightTheme = ThemeData(
+    dialogBackgroundColor: Pallete.white,
     scaffoldBackgroundColor: Pallete.lightBackground,
     appBarTheme: const AppBarTheme(
-      backgroundColor: Pallete.lightBackground,
-      centerTitle: false,
-      titleTextStyle: TextStyle(
-          fontFamily: 'Fixel',
-          fontSize: 22,
-          fontWeight: FontWeight.bold,
-          color: Pallete.black),
-    ),
+        backgroundColor: Pallete.lightBackground,
+        centerTitle: false,
+        titleTextStyle: TextStyle(
+            fontFamily: 'Fixel',
+            fontSize: 22,
+            fontWeight: FontWeight.bold,
+            color: Pallete.black),
+        iconTheme: IconThemeData(color: Pallete.black)),
     textTheme: const TextTheme(
-      bodyLarge: TextStyle(fontFamily: 'Fixel'),
-      bodyMedium: TextStyle(fontFamily: 'Fixel'),
-      displayLarge: TextStyle(fontFamily: 'Fixel'),
-      displayMedium: TextStyle(fontFamily: 'Fixel'),
-      displaySmall: TextStyle(fontFamily: 'Fixel'),
+      bodyLarge: TextStyle(fontFamily: 'Fixel', color: Pallete.black),
+      bodyMedium: TextStyle(fontFamily: 'Fixel', color: Pallete.black),
+      displayLarge: TextStyle(fontFamily: 'Fixel', color: Pallete.black),
+      displayMedium: TextStyle(fontFamily: 'Fixel', color: Pallete.black),
+      displaySmall: TextStyle(fontFamily: 'Fixel', color: Pallete.black),
     ),
     inputDecorationTheme: InputDecorationTheme(
       contentPadding: const EdgeInsets.only(
@@ -68,13 +68,22 @@ class AppTheme {
       ),
       floatingLabelBehavior: FloatingLabelBehavior.always,
     ),
+    tabBarTheme: const TabBarTheme(
+      indicatorColor: Pallete.lightPurple,
+      unselectedLabelColor: Pallete.grey,
+      labelColor: Pallete.black,
+    ),
   );
 
   static final ThemeData dartTheme = ThemeData(
+    dialogTheme: const DialogTheme(backgroundColor: Pallete.darkBackground),
     scaffoldBackgroundColor: Pallete.darkBackground,
     appBarTheme: const AppBarTheme(
       backgroundColor: Pallete.darkBackground,
       centerTitle: false,
+      iconTheme: IconThemeData(
+        color: Pallete.white,
+      ),
       titleTextStyle: TextStyle(
           fontFamily: 'Fixel',
           fontSize: 22,
@@ -94,7 +103,7 @@ class AppTheme {
         bottom: 16,
         left: 24,
       ),
-      fillColor: Pallete.darkBackground,
+      fillColor: Pallete.grey,
       border: OutlineInputBorder(
         borderRadius: BorderRadius.circular(12.0),
       ),
@@ -119,6 +128,11 @@ class AppTheme {
         color: Pallete.lightBackground,
       ),
       floatingLabelBehavior: FloatingLabelBehavior.always,
+    ),
+    tabBarTheme: const TabBarTheme(
+      indicatorColor: Pallete.lightPurple,
+      unselectedLabelColor: Pallete.grey,
+      labelColor: Pallete.lightBackground,
     ),
   );
 }
