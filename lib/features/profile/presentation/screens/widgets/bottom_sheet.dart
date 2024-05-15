@@ -78,7 +78,6 @@ class _BottomSheetPaymentState extends State<BottomSheetPayment> {
               child: Button(
                 text: 'Купити',
                 function: () {
-                  // Перевірка на пустоту кожного поля
                   if (cardNumberController.text.isEmpty ||
                       expireController.text.isEmpty ||
                       cvvController.text.isEmpty) {
