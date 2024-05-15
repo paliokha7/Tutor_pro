@@ -40,7 +40,7 @@ class AuthRepository {
       final user = UserModel.fromJson(userData);
       await tokenManager.saveAccessToken(token);
 
-      return right(user); // Повернути результат успішної реєстрації
+      return right(user);
     } on DioException catch (e) {
       if (e.response?.statusCode == 422) {
         return left(Failure('422'));

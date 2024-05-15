@@ -5,7 +5,7 @@ import 'package:tutor_pro/core/common/sign_button.dart';
 import 'package:tutor_pro/features/profile/presentation/cubits/payment_cubit/payment_cubit.dart';
 
 class BottomSheetPayment extends StatefulWidget {
-  const BottomSheetPayment({Key? key}) : super(key: key);
+  const BottomSheetPayment({super.key});
 
   @override
   State<BottomSheetPayment> createState() => _BottomSheetPaymentState();

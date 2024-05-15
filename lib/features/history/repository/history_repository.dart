@@ -41,7 +41,6 @@ class HistoryRepository {
         });
         paraphrases.add(paraphrase);
       }
-      print(paraphrases);
       return right(paraphrases);
     } catch (e) {
       return left(Failure('Failed to fetch paraphrases: $e'));

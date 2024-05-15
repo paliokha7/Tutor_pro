@@ -8,7 +8,7 @@ import 'package:tutor_pro/features/profile/presentation/cubits/user_cubit/user_c
 class HistoryReading extends StatefulWidget {
   final ParaphraseModel paraphrase;
 
-  const HistoryReading({Key? key, required this.paraphrase}) : super(key: key);
+  const HistoryReading({super.key, required this.paraphrase});
 
   @override
   State<HistoryReading> createState() => _HistoryReadingState();
