@@ -44,7 +44,7 @@ class Subjects extends StatelessWidget {
                   child: const SubjectCard(
                     color: Pallete.lightOrage,
                     title: 'Географія',
-                    subtitle: 'Прочитайте коспект та пройдіть тест',
+                    subtitle: 'Прочитайте конспект та пройдіть тест',
                   ),
                   onTap: () {
                     Navigator.push(
@@ -60,7 +60,7 @@ class Subjects extends StatelessWidget {
                   child: const SubjectCard(
                     color: Pallete.lightRed,
                     title: 'Історія',
-                    subtitle: 'Прочитайте коспект та пройдіть тест',
+                    subtitle: 'Прочитайте конспект та пройдіть тест',
                   ),
                   onTap: () {
                     Navigator.push(
@@ -76,7 +76,7 @@ class Subjects extends StatelessWidget {
                   child: const SubjectCard(
                     color: Pallete.green,
                     title: 'Біологія',
-                    subtitle: 'Прочитайте коспект та пройдіть тест',
+                    subtitle: 'Прочитайте конспект та пройдіть тест',
                   ),
                   onTap: () {
                     Navigator.push(
